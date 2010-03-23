@@ -1,0 +1,3 @@
+Some valid ROMS are generating black screens
+
+Passing in the "obect missing" s3 key throws the generator into a tight loop

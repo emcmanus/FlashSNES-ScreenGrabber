@@ -1,0 +1,38 @@
+This is a fork of the flash viewer, which already has a thin custom driver. It should be pretty easy to modify that driver for headless use.
+
+
+===============================
+Usage:
+
+./screen_grabber romfile output_file_prefix
+
+Example:
+
+./screen_grabber dk_rom_1 test_output/dk_out    # (Assumes test_output/ exists)
+
+===============================
+Important files:
+
+snes9x-flash/flash/headless.cpp - The main C file -- essentially our driver, takes a ROM file and outputs a series of screenshots
+snes9x-flash/Makefile.headless - The application's Makefile
+snes9x-flash/png - contains the png library used for image output
+
+
+===============================
+Building:
+
+make -f Makefile.headless;
+
+
+===============================
+Compressing output:
+
+Currently the generated PNG's are not optimized for compression. To do that, I'd need to generate the palette for every image.
+
+Instead, use pngcrush if compression is necessary. Example usage:
+
+`pngcrush -bit_depth=8 -v test-screenshot2.png test-compressed-screenshot2.png`
+
+To join into a single PNG: (Replace "output_file_prefix")
+
+convert 'output_file_prefix*.png' +append test_spritized.png && pngcrush test_spritized.png
