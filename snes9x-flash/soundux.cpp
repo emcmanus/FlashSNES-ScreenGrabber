@@ -2087,7 +2087,7 @@ void S9xMixSamples (uint8 *buffer, int sample_count)
 					CLIP16(I);
 					#ifndef FLASH
 					((int16 *) buffer) [J] = I;
-					#elif
+					#else
 					// Flash mixing only! Eliminates a casting buffer
 					((float *) buffer) [J] = I/32768.0f;  // Does this need to be a value from 0-1? Currently we're bounding between -1 and 1.
 					#endif
